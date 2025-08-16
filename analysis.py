@@ -540,6 +540,17 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
     plt.savefig('age_distribution_histogram.png')
     plt.clf()
 
+    # Bar chart: Attrition by Age Group
+    age_group_attrition_plot = pd.crosstab(df['AgeGroup'], df['Attrition'], normalize='index') * 100
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x=age_group_attrition_plot.index, y=age_group_attrition_plot['Yes'], hue=age_group_attrition_plot.index, palette='viridis', legend=False)
+    plt.title('Attrition Rate by Age Group: Youngest Employees Show Highest Turnover', fontsize=16)
+    plt.xlabel('Age Group', fontsize=12)
+    plt.ylabel('Attrition Rate (%)', fontsize=12)
+    plt.xticks(rotation=0)
+    plt.savefig('attrition_by_age_group_bar_chart.png')
+    plt.clf()
+
     # Histograms: MonthlyIncome Distribution
     plt.figure(figsize=(10, 6))
     sns.histplot(df['MonthlyIncome'], bins=20, kde=True, color=custom_palette[1])

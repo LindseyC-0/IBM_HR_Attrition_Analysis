@@ -98,7 +98,7 @@ Our analysis illuminates critical areas demanding HR's strategic attention to mi
 
 
 * The youngest age group (18-30 years) shows the highest turnover at 27.91%, underscoring a critical challenge in retaining early-career talent.
-![age_distribution_histogram](img/age_distribution_histogram.png)
+![attrition_by_age_group_bar_chart](img/attrition_by_age_group_bar_chart.png)
 
 
 
