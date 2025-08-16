@@ -1,0 +1,438 @@
+--- 1. Data Cleaning & Preparation ---
+
+Data Cleaning: Checked for duplicate rows. Found 0 duplicates.
+
+Dataset Overview:
+The dataset contains 1470 rows (employees) and 32 columns (attributes) after cleaning.
+
+Missing Values Check:
+Found 5 missing values in total. Details per column:
+Age                         0
+Attrition                   0
+BusinessTravel              0
+DailyRate                   0
+Department                  0
+DistanceFromHome            0
+Education                   0
+EducationField              0
+EnvironmentSatisfaction     0
+Gender                      0
+HourlyRate                  0
+JobInvolvement              0
+JobLevel                    0
+JobRole                     0
+JobSatisfaction             0
+MaritalStatus               0
+MonthlyIncome               0
+MonthlyRate                 0
+NumCompaniesWorked          0
+OverTime                    0
+PercentSalaryHike           0
+PerformanceRating           0
+RelationshipSatisfaction    0
+StockOptionLevel            0
+TotalWorkingYears           0
+TrainingTimesLastYear       0
+WorkLifeBalance             0
+YearsAtCompany              0
+YearsInCurrentRole          0
+YearsSinceLastPromotion     0
+YearsWithCurrManager        0
+AgeGroup                    5
+
+Descriptive Statistics for Numeric Columns:
+Summary of numerical data (e.g., age, income, rates):
+|                         | count   | mean     | std      | min   | 25%   | 50%     | 75%     | max   |
+|:------------------------|:--------|:---------|:---------|:------|:------|:--------|:--------|:------|
+| Age                     | 1470    | 36.9238  | 9.13537  | 18    | 30    | 36      | 43      | 60    |
+| DailyRate               | 1470    | 802.486  | 403.509  | 102   | 465   | 802     | 1157    | 1499  |
+| DistanceFromHome        | 1470    | 9.19252  | 8.10686  | 1     | 2     | 7       | 14      | 29    |
+| HourlyRate              | 1470    | 65.8912  | 20.3294  | 30    | 48    | 66      | 83.75   | 100   |
+| JobLevel                | 1470    | 2.06395  | 1.10694  | 1     | 1     | 2       | 3       | 5     |
+| MonthlyIncome           | 1470    | 6502.93  | 4707.96  | 1009  | 2911  | 4919    | 8379    | 19999 |
+| MonthlyRate             | 1470    | 14313.1  | 7117.79  | 2094  | 8047  | 14235.5 | 20461.5 | 26999 |
+| NumCompaniesWorked      | 1470    | 2.6932   | 2.49801  | 0     | 1     | 2       | 4       | 9     |
+| PercentSalaryHike       | 1470    | 15.2095  | 3.65994  | 11    | 12    | 14      | 18      | 25    |
+| StockOptionLevel        | 1470    | 0.793878 | 0.852077 | 0     | 0     | 1       | 1       | 3     |
+| TotalWorkingYears       | 1470    | 11.2796  | 7.78078  | 0     | 6     | 10      | 15      | 40    |
+| TrainingTimesLastYear   | 1470    | 2.79932  | 1.28927  | 0     | 2     | 3       | 3       | 6     |
+| YearsAtCompany          | 1470    | 7.00816  | 6.12653  | 0     | 3     | 5       | 9       | 40    |
+| YearsInCurrentRole      | 1470    | 4.22925  | 3.62314  | 0     | 2     | 3       | 7       | 18    |
+| YearsSinceLastPromotion | 1470    | 2.18776  | 3.22243  | 0     | 0     | 1       | 3       | 15    |
+| YearsWithCurrManager    | 1470    | 4.12313  | 3.56814  | 0     | 2     | 3       | 7       | 17    |
+
+--- 2. Attrition Analysis (Target Focus) ---
+
+Overall Attrition Rate:
+A 16.12% of employees left the company last year, while 83.88% remained. This matches the overall industry rate of 16.12%.
+
+Attrition by Demographics:
+
+- Gender Impact: Males show a slightly higher attrition rate of 17.01% compared to females at 14.80%.
+
+- Marital Status Impact: Single employees have an attrition rate of 25.53%. This is more than double the rate for married employees (12.48%) and higher than divorced employees (10.09%).
+
+- Age Group Attrition:
+The youngest group (18-30 years) exhibits the highest attrition at 27.91%, indicating challenges in retaining early-career talent.
+| AgeGroup   | No      | Yes     |
+|:-----------|:--------|:--------|
+| 18-30      | 72.0859 | 27.9141 |
+| 31-40      | 85.6913 | 14.3087 |
+| 41-50      | 90.2579 | 9.74212 |
+| 51+        | 86.3095 | 13.6905 |
+
+Attrition by Work-Related Features:
+
+- Department Turnover: The Sales department has the highest attrition rate at 20.63%, closely followed by Human Resources. Research & Development has the lowest.
+| Department             | No      | Yes     |
+|:-----------------------|:--------|:--------|
+| Human Resources        | 80.9524 | 19.0476 |
+| Research & Development | 86.1602 | 13.8398 |
+| Sales                  | 79.3722 | 20.6278 |
+
+- Job Role Turnover: Sales Representatives face an attrition rate of 39.76%, making it the role with the highest turnover.
+| JobRole                   | No      | Yes     |
+|:--------------------------|:--------|:--------|
+| Sales Representative      | 60.241  | 39.759  |
+| Laboratory Technician     | 76.0618 | 23.9382 |
+| Human Resources           | 76.9231 | 23.0769 |
+| Sales Executive           | 82.5153 | 17.4847 |
+| Research Scientist        | 83.9041 | 16.0959 |
+| Manufacturing Director    | 93.1034 | 6.89655 |
+| Healthcare Representative | 93.1298 | 6.87023 |
+| Manager                   | 95.098  | 4.90196 |
+| Research Director         | 97.5    | 2.5     |
+
+- Overtime Impact: Employees working overtime are significantly more likely to leave (30.53% attrition) compared to those who don't (10.44% attrition). This points to potential burnout or work-life balance issues.
+
+- Business Travel Frequency: Employees who travel frequently have a notably higher attrition rate (24.91%).
+| BusinessTravel    | No      | Yes     |
+|:------------------|:--------|:--------|
+| Non-Travel        | 92      | 8       |
+| Travel_Frequently | 75.0903 | 24.9097 |
+| Travel_Rarely     | 85.0431 | 14.9569 |
+
+- Commute Distance vs Attrition: Employees who left had an average commute of 10.63 miles, while those who stayed averaged 8.92 miles. Longer commutes appear to correlate with higher attrition.
+
+Attrition by Seniority & Tenure:
+
+- Years At Company: Leavers had significantly less tenure (5.13 years) compared to stayers (7.37 years).
+- Years Since Last Promotion: Those who left had, on average, fewer years since their last promotion (1.95 years) than those who stayed (2.23 years).
+- Years With Current Manager: Leavers spent less time with their current manager (2.85 years) than stayers (4.37 years). This suggests a link between career progression, managerial relationships, and retention.
+
+--- 3. Workforce Demographics ---
+
+Workforce Age Distribution:
+The average employee age is 36.92 years, with a median of 36 years. The workforce ranges from 18 to 60 years old.
+|       | Age     |
+|:------|:--------|
+| count | 1470    |
+| mean  | 36.9238 |
+| std   | 9.13537 |
+| min   | 18      |
+| 25%   | 30      |
+| 50%   | 36      |
+| 75%   | 43      |
+| max   | 60      |
+
+Gender Breakdown:
+Our workforce is composed of 60.00% Male employees (882 individuals) and 40.00% Female employees (588 individuals).
+
+Education Level Distribution:
+The majority of employees hold a Bachelor's degree.
+| Education     | proportion   |
+|:--------------|:-------------|
+| Bachelor      | 38.9116      |
+| Master        | 27.0748      |
+| College       | 19.1837      |
+| Below College | 11.5646      |
+| Doctor        | 3.26531      |
+
+Marital Status Distribution:
+Our workforce is primarily Married (673 employees), followed by Single (470) and Divorced (327).
+| MaritalStatus   | count   |
+|:----------------|:--------|
+| Married         | 673     |
+| Single          | 470     |
+| Divorced        | 327     |
+
+Department Composition:
+The largest department is Research & Development (961 employees).
+| Department             | count   |
+|:-----------------------|:--------|
+| Research & Development | 961     |
+| Sales                  | 446     |
+| Human Resources        | 63      |
+
+Job Role Composition:
+The most common roles are Sales Executive (326 employees) and Research Scientist (292 employees).
+| JobRole                   | count   |
+|:--------------------------|:--------|
+| Sales Executive           | 326     |
+| Research Scientist        | 292     |
+| Laboratory Technician     | 259     |
+| Manufacturing Director    | 145     |
+| Healthcare Representative | 131     |
+| Manager                   | 102     |
+| Sales Representative      | 83      |
+| Research Director         | 80      |
+| Human Resources           | 52      |
+
+Business Travel Frequency Distribution:
+Most employees travel Rarely (1043 employees), while a smaller portion travel Frequently or Not at all.
+| BusinessTravel    | count   |
+|:------------------|:--------|
+| Travel_Rarely     | 1043    |
+| Travel_Frequently | 277     |
+| Non-Travel        | 150     |
+
+--- 4. Compensation & Career Progression ---
+
+Monthly Income by Job Level:
+As expected, monthly income shows a clear upward trend with increasing job level.
+| JobLevel   | count   | mean    | std     | min   | 25%   | 50%   | 75%     | max   |
+|:-----------|:--------|:--------|:--------|:------|:------|:------|:--------|:------|
+| 1          | 543     | 2786.92 | 748.635 | 1009  | 2306  | 2670  | 3207    | 4968  |
+| 2          | 534     | 5502.28 | 1410.03 | 2042  | 4544  | 5340  | 6273.5  | 9998  |
+| 3          | 218     | 9817.25 | 1806    | 5210  | 8383  | 9980  | 10814.5 | 13757 |
+| 4          | 106     | 15503.8 | 1816.24 | 11103 | 13761 | 16154 | 17036.2 | 17924 |
+| 5          | 69      | 19191.8 | 512.383 | 18041 | 18880 | 19232 | 19586   | 19999 |
+
+Monthly Income by Department:
+The highest average monthly income is observed in the Sales department ($6959.17), despite its higher attrition.
+| Department             | count   | mean    | std     | min   | 25%     | 50%    | 75%     | max   |
+|:-----------------------|:--------|:--------|:--------|:------|:--------|:-------|:--------|:------|
+| Human Resources        | 63      | 6654.51 | 5788.73 | 1555  | 2644    | 3886   | 8412.5  | 19717 |
+| Research & Development | 961     | 6281.25 | 4895.84 | 1009  | 2741    | 4374   | 7655    | 19999 |
+| Sales                  | 446     | 6959.17 | 4058.74 | 1052  | 4446.25 | 5754.5 | 8776.75 | 19847 |
+
+Monthly Income by Job Role:
+Managers and Research Directors command the highest average monthly incomes, while Sales Representatives and Laboratory Technicians are among the lowest paid roles.
+| JobRole                   | count   | mean    | std     | min   | 25%     | 50%     | 75%     | max   |
+|:--------------------------|:--------|:--------|:--------|:------|:--------|:--------|:--------|:------|
+| Healthcare Representative | 131     | 7528.76 | 2542.55 | 4000  | 5562    | 6811    | 9769.5  | 13966 |
+| Human Resources           | 52      | 4235.75 | 2438.85 | 1555  | 2340.25 | 3093    | 5803.5  | 10725 |
+| Laboratory Technician     | 259     | 3237.17 | 1150.25 | 1102  | 2379.5  | 2886    | 3880.5  | 7403  |
+| Manager                   | 102     | 17181.7 | 2317.2  | 11244 | 16339.5 | 17454.5 | 19129.2 | 19999 |
+| Manufacturing Director    | 145     | 7295.14 | 2676.75 | 4011  | 5070    | 6447    | 9526    | 13973 |
+| Research Director         | 80      | 16033.5 | 2827.62 | 11031 | 13490.2 | 16510   | 18814.5 | 19973 |
+| Research Scientist        | 292     | 3239.97 | 1198.12 | 1009  | 2386    | 2887.5  | 3902.5  | 9724  |
+| Sales Executive           | 326     | 6924.28 | 2366.94 | 4001  | 5025.25 | 6231    | 8538.75 | 13872 |
+| Sales Representative      | 83      | 2626    | 854.534 | 1052  | 2250    | 2579    | 2878.5  | 6632  |
+
+Hourly Rate Distribution:
+|       | HourlyRate   |
+|:------|:-------------|
+| count | 1470         |
+| mean  | 65.8912      |
+| std   | 20.3294      |
+| min   | 30           |
+| 25%   | 48           |
+| 50%   | 66           |
+| 75%   | 83.75        |
+| max   | 100          |
+
+Monthly Rate Distribution:
+|       | MonthlyRate   |
+|:------|:--------------|
+| count | 1470          |
+| mean  | 14313.1       |
+| std   | 7117.79       |
+| min   | 2094          |
+| 25%   | 8047          |
+| 50%   | 14235.5       |
+| 75%   | 20461.5       |
+| max   | 26999         |
+
+Percent Salary Hike vs. Attrition:
+There's very little difference in average salary hike between employees who stayed (15.23%) and those who left (15.10%). This suggests that a recent percentage salary hike alone may not be a primary driver for retention.
+
+Stock Option Level Distribution & Impact:
+42.93% of employees have no stock options (Level 0), and this group has a significantly higher attrition rate (24.41%). Employees with Level 1 or 2 stock options show much lower attrition.
+
+Stock Option Level Distribution:
+| StockOptionLevel   | proportion   |
+|:-------------------|:-------------|
+| 0                  | 42.9252      |
+| 1                  | 40.5442      |
+| 2                  | 10.7483      |
+| 3                  | 5.78231      |
+
+Attrition by Stock Option Level:
+| StockOptionLevel   | No      | Yes     |
+|:-------------------|:--------|:--------|
+| 0                  | 75.5943 | 24.4057 |
+| 1                  | 90.604  | 9.39597 |
+| 2                  | 92.4051 | 7.59494 |
+| 3                  | 82.3529 | 17.6471 |
+
+Career Progression: Total Working Years vs. Monthly Income Correlation:
+There's a strong positive correlation of 0.77 between Total Working Years and Monthly Income. This confirms a healthy career progression pathway where experience generally leads to higher earnings.
+
+--- 5. Satisfaction & Engagement Analysis ---
+
+Distribution of Key Satisfaction & Engagement Variables:
+
+Job Satisfaction Distribution:
+| JobSatisfaction   | count   |
+|:------------------|:--------|
+| Very High         | 459     |
+| High              | 442     |
+| Low               | 289     |
+| Medium            | 280     |
+
+Environment Satisfaction Distribution:
+| EnvironmentSatisfaction   | count   |
+|:--------------------------|:--------|
+| High                      | 453     |
+| Very High                 | 446     |
+| Medium                    | 287     |
+| Low                       | 284     |
+
+Relationship Satisfaction Distribution:
+| RelationshipSatisfaction   | count   |
+|:---------------------------|:--------|
+| High                       | 459     |
+| Very High                  | 432     |
+| Medium                     | 303     |
+| Low                        | 276     |
+
+Work-Life Balance Distribution:
+| WorkLifeBalance   | count   |
+|:------------------|:--------|
+| Better            | 893     |
+| Good              | 344     |
+| Best              | 153     |
+| Bad               | 80      |
+
+Job Involvement Distribution:
+| JobInvolvement   | count   |
+|:-----------------|:--------|
+| High             | 868     |
+| Medium           | 375     |
+| Very High        | 144     |
+| Low              | 83      |
+
+Attrition vs. Satisfaction Levels:
+Generally, lower satisfaction levels correlate with higher attrition.
+
+- Job Satisfaction vs. Attrition: Employees with 'Low' Job Satisfaction have an attrition rate of 22.84%, significantly higher than those with 'Very High' satisfaction (11.33%).
+| JobSatisfaction   | No      | Yes     |
+|:------------------|:--------|:--------|
+| High              | 83.4842 | 16.5158 |
+| Low               | 77.1626 | 22.8374 |
+| Medium            | 83.5714 | 16.4286 |
+| Very High         | 88.671  | 11.329  |
+
+- Environment Satisfaction vs. Attrition: Similar to job satisfaction, 'Low' Environment Satisfaction sees 25.35% attrition.
+| EnvironmentSatisfaction   | No      | Yes     |
+|:--------------------------|:--------|:--------|
+| High                      | 86.3135 | 13.6865 |
+| Low                       | 74.6479 | 25.3521 |
+| Medium                    | 85.0174 | 14.9826 |
+| Very High                 | 86.5471 | 13.4529 |
+
+- Relationship Satisfaction vs. Attrition: 'Low' Relationship Satisfaction leads to 20.65% attrition.
+| RelationshipSatisfaction   | No      | Yes     |
+|:---------------------------|:--------|:--------|
+| High                       | 84.5316 | 15.4684 |
+| Low                        | 79.3478 | 20.6522 |
+| Medium                     | 85.1485 | 14.8515 |
+| Very High                  | 85.1852 | 14.8148 |
+
+- Work-Life Balance vs. Attrition: A 'Bad' Work-Life Balance is associated with the highest attrition at 31.25%.
+| WorkLifeBalance   | No      | Yes     |
+|:------------------|:--------|:--------|
+| Bad               | 68.75   | 31.25   |
+| Best              | 82.3529 | 17.6471 |
+| Better            | 85.7783 | 14.2217 |
+| Good              | 83.1395 | 16.8605 |
+
+- Job Involvement vs. Attrition: 'Low' Job Involvement has a high attrition rate of 33.73%, indicating disengagement is a significant factor.
+| JobInvolvement   | No      | Yes     |
+|:-----------------|:--------|:--------|
+| High             | 85.5991 | 14.4009 |
+| Low              | 66.2651 | 33.7349 |
+| Medium           | 81.0667 | 18.9333 |
+| Very High        | 90.9722 | 9.02778 |
+
+Job Role vs. Job Satisfaction (Counts):
+Examining satisfaction levels across different job roles can highlight specific areas of concern:
+| JobRole                   | High   | Low   | Medium   | Very High   |
+|:--------------------------|:-------|:------|:---------|:------------|
+| Healthcare Representative | 43     | 26    | 19       | 43          |
+| Human Resources           | 13     | 10    | 16       | 13          |
+| Laboratory Technician     | 75     | 56    | 48       | 80          |
+| Manager                   | 27     | 21    | 21       | 33          |
+| Manufacturing Director    | 49     | 26    | 32       | 38          |
+| Research Director         | 27     | 15    | 16       | 22          |
+| Research Scientist        | 90     | 54    | 53       | 95          |
+| Sales Executive           | 91     | 69    | 54       | 112         |
+| Sales Representative      | 27     | 12    | 21       | 23          |
+
+Monthly Income by Job Satisfaction Level (Summary Stats):
+There isn't a strong direct correlation between income level and job satisfaction. Employees across all satisfaction levels show similar income ranges.
+| JobSatisfaction   | count   | mean    | std     | min   | 25%    | 50%    | 75%    | max   |
+|:------------------|:--------|:--------|:--------|:------|:-------|:-------|:-------|:------|
+| High              | 442     | 6480.5  | 4798.17 | 1009  | 2916.5 | 4788.5 | 8225   | 19999 |
+| Low               | 289     | 6561.57 | 4645.17 | 1091  | 3072   | 4968   | 8564   | 19943 |
+| Medium            | 280     | 6527.33 | 4867.22 | 1052  | 2764.5 | 4853   | 8393.5 | 19926 |
+| Very High         | 459     | 6472.73 | 4573.91 | 1051  | 2927.5 | 5126   | 7908   | 19845 |
+
+--- 6. Performance & Development ---
+
+Performance Rating Distribution:
+The majority of employees (1244 individuals) are rated as 'Good', with 226 rated 'Outstanding'. The distribution is skewed towards higher ratings.
+| PerformanceRating   | count   |
+|:--------------------|:--------|
+| Good                | 1244    |
+| Outstanding         | 226     |
+
+Training Times Last Year & Attrition Impact:
+Employees received training an average of 2.80 times last year. Interestingly, those who stayed received slightly more training (2.83 times) than those who left (2.62 times).
+|       | TrainingTimesLastYear   |
+|:------|:------------------------|
+| count | 1470                    |
+| mean  | 2.79932                 |
+| std   | 1.28927                 |
+| min   | 0                       |
+| 25%   | 2                       |
+| 50%   | 3                       |
+| 75%   | 3                       |
+| max   | 6                       |
+
+Years Since Last Promotion vs. Attrition:
+Employees who left had, on average, fewer years since their last promotion (1.95 years) compared to those who stayed (2.23 years). This suggests that slower career progression is a factor in attrition.
+
+Years With Current Manager vs. Attrition:
+Leavers spent significantly less time with their current manager (2.85 years) than stayers (4.37 years). Frequent manager changes or shorter tenures with managers could contribute to attrition.
+
+Correlation: Job Involvement vs. Performance Rating:
+The correlation between Job Involvement and Performance Rating is -0.00. This very weak correlation suggests that an employee's perceived involvement in their job doesn't strongly predict their formal performance rating in this dataset.
+
+--- 7. Advanced Attrition Prediction ---
+This section outlines the process for building machine learning models to predict employee attrition:
+1.  Feature Encoding: Convert all categorical features into numerical formats (e.g., One-Hot Encoding).
+2.  Data Splitting: Divide the dataset into training and testing sets.
+3.  Model Training: Apply algorithms like Logistic Regression, Random Forest, or Gradient Boosting.
+4.  Feature Importance: Identify the strongest predictors of attrition from the trained models.
+5.  Model Evaluation: Assess model performance using metrics like accuracy, ROC-AUC, precision, and recall.
+
+--- 8. Visualizations ---
+
+--- 9. Insights & HR Recommendations ---
+This final section synthesizes all the analysis into actionable insights and recommendations. Here are examples of how you would articulate these points based on the data generated above:
+
+Key Attrition Risk Groups:
+- Young, Single Employees: This demographic (especially 18-30 year olds) consistently shows higher attrition rates. Targeted mentorship, career development plans, and community-building initiatives could be beneficial.
+- Sales Representatives & Laboratory Technicians: These roles experience unusually high turnover. Investigate workload, compensation equity, and career path clarity within these departments.
+- Employees Working Overtime/Long Commutes: High overtime and longer commute distances correlate with higher attrition. Review staffing levels, flexible work options, and commute support programs.
+- Employees with Low Satisfaction or Stock Options: Low job/environment satisfaction and lack of stock options are strong indicators of potential attrition. Implement regular satisfaction surveys, address feedback promptly and review stock option eligibility.
+
+Compensation & Career Progression Considerations:
+- While income generally increases with job level, ensure compensation is competitive specifically for high-risk roles like Sales Representatives and Laboratory Technicians, where attrition is high despite potentially lower pay relative to other roles.
+- Promotions & Managerial Relationships: Employees with shorter tenures in their current role/company and less time with their current manager are more prone to attrition. Focus on clear promotion pathways and training for managers to build strong, supportive relationships with their teams.
+- Work-Life Balance Initiatives: Implement policies that promote better work-life balance, such as flexible hours, remote work options, or caps on overtime, especially for roles prone to burnout.
+- Managerial Training: Equip managers with skills to foster employee engagement, provide regular feedback and support career growth to improve retention within their teams.
+- Review Compensation Structure: Conduct a deeper dive into compensation fairness, particularly for roles and demographics identified as high-risk, and consider adjustments where inequities exist.
+- Enhance Satisfaction Drivers: Actively address factors contributing to low job and environment satisfaction through direct feedback mechanisms and actionable improvements.
