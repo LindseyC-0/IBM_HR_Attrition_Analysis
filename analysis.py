@@ -7,15 +7,11 @@ import sys
 # Load the dataset
 df = pd.read_csv('WA_Fn-UseC_-HR-Employee-Attrition.csv')
 
-# Save a reference to the original standard output
 original_stdout = sys.stdout
 
-# Open the file in write mode; 'w' will create/overwrite the file.
-# All subsequent print() statements (within this 'with' block) will write to this file.
 with open('HR_Attrition_Report_Text.txt', 'w') as f:
     sys.stdout = f # Redirect standard output to the file
 
-    # --- YOUR ENTIRE ANALYSIS SCRIPT GOES HERE ---
     # Load the dataset
     df = pd.read_csv('WA_Fn-UseC_-HR-Employee-Attrition.csv')
 
@@ -32,9 +28,9 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
 
     # Map ordinal variables for interpretability
     education_map = {1: 'Below College', 2: 'College', 3: 'Bachelor', 4: 'Master', 5: 'Doctor'}
-    satisfaction_map = {1: 'Low', 2: 'Medium', 3: 'High', 4: 'Very High'} # Used for EnvironmentSatisfaction, JobInvolvement, JobSatisfaction, RelationshipSatisfaction
+    satisfaction_map = {1: 'Low', 2: 'Medium', 3: 'High', 4: 'Very High'} 
     worklife_balance_map = {1: 'Bad', 2: 'Good', 3: 'Better', 4: 'Best'}
-    performance_map = {3: 'Good', 4: 'Outstanding'} # PerformanceRating is typically 3 or 4
+    performance_map = {3: 'Good', 4: 'Outstanding'} 
 
     df['Education'] = df['Education'].map(education_map)
     df['EnvironmentSatisfaction'] = df['EnvironmentSatisfaction'].map(satisfaction_map)
@@ -42,17 +38,15 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
     df['RelationshipSatisfaction'] = df['RelationshipSatisfaction'].map(satisfaction_map)
     df['WorkLifeBalance'] = df['WorkLifeBalance'].map(worklife_balance_map)
     df['PerformanceRating'] = df['PerformanceRating'].map(performance_map)
-    df['JobInvolvement'] = df['JobInvolvement'].map(satisfaction_map) # Assuming similar mapping for JobInvolvement
+    df['JobInvolvement'] = df['JobInvolvement'].map(satisfaction_map) 
 
     # Create age groups (20–30, 31–40, 41–50, 51+).
-    # IMPORTANT: This needs to happen BEFORE 'AgeGroup' is added to categorical_cols for astype('category')
     bins = [17, 30, 40, 50, 60] # Adjusted bins to capture 18-30 and ensure 51+
     labels = ['18-30', '31-40', '41-50', '51+']
     df['AgeGroup'] = pd.cut(df['Age'], bins=bins, labels=labels, right=False)
 
 
     # Confirm categorical encoding: Convert specified columns into categorical data types.
-    # IMPORTANT: 'JobInvolvement', 'PerformanceRating', and 'AgeGroup' are now guaranteed to exist
     categorical_cols = ['Attrition', 'Gender', 'MaritalStatus', 'BusinessTravel', 'Department',
                         'EducationField', 'JobRole', 'OverTime', 'JobInvolvement', 'PerformanceRating', 'AgeGroup']
     df[categorical_cols] = df[categorical_cols].astype('category')
@@ -65,7 +59,6 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
     if missing_values == 0:
         print(f"No missing values detected across all columns.")
     else:
-        # Use to_string() here as it's just a Series print, no need for to_markdown
         print(f"Found {missing_values} missing values in total. Details per column:\n{df.isnull().sum().to_string()}")
 
     print("\nDescriptive Statistics for Numeric Columns:")
@@ -290,7 +283,7 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
     print(attr_job_involve.to_markdown(numalign="left", stralign="left"))
 
 
-    # Cross-tab: JobRole vs Satisfaction (do certain roles report lower satisfaction?).
+    # JobRole vs Satisfaction (do certain roles report lower satisfaction?).
     print("\nJob Role vs. Job Satisfaction (Counts):")
     job_role_sat_crosstab = pd.crosstab(df['JobRole'], df['JobSatisfaction'])
     print("Examining satisfaction levels across different job roles can highlight specific areas of concern:")
@@ -306,7 +299,7 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
     # --- 6. Performance & Development ---
     print("\n--- 6. Performance & Development ---")
 
-    # PerformanceRating distribution: check if skewed (most employees rated 3–4).
+    # PerformanceRating distribution: 
     print("\nPerformance Rating Distribution:")
     perf_rating_dist = df['PerformanceRating'].value_counts()
     print(f"The majority of employees ({perf_rating_dist.loc['Good']} individuals) are rated as 'Good', with {perf_rating_dist.loc['Outstanding']} rated 'Outstanding'. The distribution is skewed towards higher ratings.")
@@ -335,6 +328,7 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
 
     # JobInvolvement vs PerformanceRating correlation.
     print("\nCorrelation: Job Involvement vs. Performance Rating:")
+    
     # Convert categorical series to their numerical codes for correlation calculation
     job_involvement_codes = df['JobInvolvement'].cat.codes
     performance_rating_codes = df['PerformanceRating'].cat.codes
@@ -356,7 +350,7 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
     print("5.  Model Evaluation: Assess model performance using metrics like accuracy, ROC-AUC, precision, and recall.")
 
 
-    # --- 8. Visualizations ---
+    # --- 8. Visualisations ---
     print("\n--- 8. Visualizations ---")
     sns.set_style("whitegrid")
     custom_palette = sns.color_palette("rocket") # Define a custom color palette for consistent styling
@@ -390,7 +384,7 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
     plt.xlabel('Job Role', fontsize=12)
     plt.ylabel('Attrition Rate (%)', fontsize=12)
     plt.xticks(rotation=45, ha='right')
-    plt.tight_layout() # Adjust layout to prevent labels overlapping
+    plt.tight_layout() 
     plt.savefig('attrition_by_jobrole_bar_chart.png')
     plt.clf()
 
@@ -438,7 +432,6 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
     plt.clf()
 
     # Bar chart: Attrition by YearsAtCompany
-    # Bin YearsAtCompany for better visualization if there are many unique values
     bins_yac = [0, 1, 3, 5, 10, 15, 20, df['YearsAtCompany'].max() + 1]
     labels_yac = ['<1', '1-3', '3-5', '5-10', '10-15', '15-20', '20+']
     df['YearsAtCompanyGroup'] = pd.cut(df['YearsAtCompany'], bins=bins_yac, labels=labels_yac, right=False)
@@ -453,7 +446,7 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
 
     # Bar chart: Attrition by YearsSinceLastPromotion
     bins_ysl = [0, 1, 2, 5, df['YearsSinceLastPromotion'].max() + 1]
-    labels_ysl = ['0', '1', '2-4', '5+'] # Adjusted to match common promotion cycles
+    labels_ysl = ['0', '1', '2-4', '5+'] 
     df['YearsSincePromotionGroup'] = pd.cut(df['YearsSinceLastPromotion'], bins=bins_ysl, labels=labels_ysl, right=False)
     ysl_attrition_plot = pd.crosstab(df['YearsSincePromotionGroup'], df['Attrition'], normalize='index') * 100
     plt.figure(figsize=(12, 7))
@@ -625,6 +618,5 @@ with open('HR_Attrition_Report_Text.txt', 'w') as f:
     print("- Review Compensation Structure: Conduct a deeper dive into compensation fairness, particularly for roles and demographics identified as high-risk, and consider adjustments where inequities exist.")
     print("- Enhance Satisfaction Drivers: Actively address factors contributing to low job and environment satisfaction through direct feedback mechanisms and actionable improvements.")
 
-# Reset standard output to the console after the 'with' block
 sys.stdout = original_stdout
 print("\nAnalysis complete! The text report has been saved to 'HR_Attrition_Report_Text.txt' and plots are saved in the current directory.")
