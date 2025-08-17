@@ -220,7 +220,7 @@ Invest in comprehensive managerial training programs focused on fostering strong
 Establish a more frequent and robust system for collecting employee satisfaction feedback. Crucially, ensure that feedback, especially from areas with low satisfaction scores, is promptly analysed and translated into concrete organisational improvements.
 
 
-**Author: Lindsey C** 
+**Lindsey C** 
 
 [LinkedIn Profile](https://www.linkedin.com/in/lilingxi-chen/)
 
