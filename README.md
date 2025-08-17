@@ -103,7 +103,8 @@ Our analysis illuminates critical areas demanding HR's strategic attention to mi
 3. **High-Impact Operational Stressors:**
 
 * Sales Representatives face an alarming attrition rate of 39.76%, making this role an immediate priority for retention efforts. The Sales department overall also shows a higher turnover at 20.63%.
-![attrition_by_department_bar_chart](img/attrition_by_department_bar_chart.png)
+![attrition_by_jobrole_bar_chart](img/attrition_by_jobrole_bar_chart.png)
+
 
 
 
