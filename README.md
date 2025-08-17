@@ -92,10 +92,6 @@ Our analysis illuminates critical areas demanding HR's strategic attention to mi
 
 2. **Demographic Flight Risks:**
 
-* Single employees represent a significant flight risk, exhibiting an attrition rate of 25.53%. This is more than double the rate for married (12.48%) or divorced (10.09%) colleagues, suggesting unique retention needs for this group. 
-![attrition_by_relationship_satisfaction_bar_chart](img/attrition_by_relationship_satisfaction_bar_chart.png)
-
-
 
 * The youngest age group (18-30 years) shows the highest turnover at 27.91%, underscoring a critical challenge in retaining early-career talent.
 ![attrition_by_age_group_bar_chart](img/attrition_by_age_group_bar_chart.png)
